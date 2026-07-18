@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+
+# Generated / runtime data (Bronze/Silver/Gold, landing zone, DuckDB files)
+data/
+*.duckdb
+*.duckdb.wal
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Evidence.dev
+dashboards/node_modules/
+dashboards/.evidence/
+dashboards/build/
+
+# Prefect
+.prefect/
+
+# Docker
+docker/**/.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

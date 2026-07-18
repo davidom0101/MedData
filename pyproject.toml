@@ -1,0 +1,34 @@
+[project]
+name = "meddata-ingest"
+version = "0.1.0"
+description = "Production-style clinical trial data engineering pipeline (solo portfolio project)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.15.22",
+]
+
+# Note: Prefect and dbt-duckdb are intentionally NOT listed here. They run in
+# their own containers (docker/prefect.Dockerfile, docker/dbt.Dockerfile) with
+# their own pinned versions, since dbt-core and Prefect pull overlapping but
+# independently-versioned deps (click, jinja2, pydantic) that don't need to
+# coexist in one environment. This env is for local dev: the generator
+# (stdlib-only) and the test/lint tooling.
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "flows/tests"]
+
+[tool.setuptools]
+packages = ["data_generator"]

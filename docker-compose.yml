@@ -1,0 +1,32 @@
+services:
+  prefect:
+    build:
+      context: .
+      dockerfile: docker/prefect.Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./flows:/app/flows
+      - ./data:/data
+    environment:
+      - PREFECT_API_URL=http://0.0.0.0:4200/api
+
+  # temporary, just checks version. run on-demand once dbt project exists:
+  # docker compose run --rm dbt dbt build
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/dbt.Dockerfile
+    volumes:
+      - ./dbt:/app/dbt
+      - ./data:/data
+
+  # temporary placeholder. swap CMD to npm run dev and uncomment ports once scaffolded
+  evidence:
+    build:
+      context: .
+      dockerfile: docker/evidence.Dockerfile
+    volumes:
+      - ./dashboards:/app/dashboards
+    # ports:
+    #   - "3000:3000"
